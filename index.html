@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shah Alam Flood Risk Map</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map { height: 100vh; width: 100%; }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    // Initialize map centered on Taman Sri Muda
+    const map = L.map('map').setView([3.0225, 101.495], 13);
+
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Array of 30 flood-prone locations
+    const floodPoints = [
+      { name: "Jalan 8/33", coords: [3.0200, 101.4900] },
+      { name: "Jalan 8/29", coords: [3.0185, 101.4885] },
+      { name: "Jalan 8/39", coords: [3.0228, 101.4960] },
+      { name: "Jalan 9/7", coords: [3.0272, 101.4938] },
+      { name: "Jalan 9/9", coords: [3.0295, 101.4910] },
+      { name: "Jalan Nyaman 25/20", coords: [3.0255, 101.4970] },
+      { name: "Jalan Makmur 25/64", coords: [3.0268, 101.5000] },
+      { name: "Jalan Masyur 25/50", coords: [3.0252, 101.4930] },
+      { name: "Jalan Tokoh 25/28", coords: [3.0240, 101.4940] },
+      { name: "Jalan Anggerik Tania 31/114", coords: [3.0375, 101.5035] },
+      { name: "Jalan Sungai Merbau", coords: [3.0350, 101.5100] },
+      { name: "Jalan Harapan", coords: [3.0245, 101.4945] },
+      { name: "Jalan Waja", coords: [3.0235, 101.4925] },
+      { name: "Jalan Mahir", coords: [3.0262, 101.4952] },
+      { name: "Section 23", coords: [3.0380, 101.4980] },
+      { name: "Section 24", coords: [3.0350, 101.4945] },
+      { name: "Section 25", coords: [3.0275, 101.4945] },
+      { name: "Section 17", coords: [3.0730, 101.5140] },
+      { name: "Section 13", coords: [3.0660, 101.5035] },
+      { name: "Section 22", coords: [3.0600, 101.5200] },
+      { name: "Section 34 – Bukit Naga", coords: [3.0070, 101.5240] },
+      { name: "Alam Impian", coords: [3.0290, 101.5370] },
+      { name: "Kota Kemuning", coords: [3.0000, 101.5320] },
+      { name: "Taman Bukit Kemuning", coords: [3.0150, 101.5290] },
+      { name: "Taman Sri Wangi", coords: [3.0100, 101.5110] },
+      { name: "Kampung Bukit Naga", coords: [3.0050, 101.5250] },
+      { name: "Stadium Shah Alam", coords: [3.0635, 101.5005] },
+      { name: "Jalan Saksama 25/39", coords: [3.0270, 101.4920] },
+      { name: "Jalan Sri Kandi 25/14", coords: [3.0260, 101.4910] },
+      { name: "Jalan Muhibbah 25/7", coords: [3.0245, 101.4905] }
+    ];
+
+    // Add markers to map
+    floodPoints.forEach(point => {
+      L.circleMarker(point.coords, {
+        color: 'red',
+        radius: 6,
+        fillOpacity: 0.6
+      })
+      .addTo(map)
+      .bindPopup(`<b>${point.name}</b><br>Flood-prone area`);
+    });
+  </script>
+</body>
+</html>
